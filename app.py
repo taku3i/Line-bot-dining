@@ -116,8 +116,8 @@ def send_weekly_meal_check():
 
 # スケジューラを別スレッドで動かす
 def run_scheduler():
-    schedule.every(1).minutes.do(send_weekly_meal_check)
-    #schedule.every().friday.at("18:00").do(send_weekly_meal_check)
+    #schedule.every(1).minutes.do(send_weekly_meal_check)
+    schedule.every().friday.at("18:00").do(send_weekly_meal_check)
     # schedule.every(1).minutes.do(send_weekly_meal_check)  # ← テスト用に1分ごとに送る場合
     while True:
         schedule.run_pending()

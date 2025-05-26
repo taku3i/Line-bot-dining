@@ -11,10 +11,18 @@ from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
+import json
+import os
+
 
 def get_latest_form_url():
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-    creds = ServiceAccountCredentials.from_json_keyfile_name('line-bot-form-reader-dfa8acebe06d.json', scope)
+    
+    json_str = os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON')
+    service_account_info = json.loads(json_str)
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(service_account_info, scope)
+    client = gspread.authorize(creds)
+    
     client = gspread.authorize(creds)
 
     # スプレッドシート名は正確に！例：「ご飯フォーム管理」

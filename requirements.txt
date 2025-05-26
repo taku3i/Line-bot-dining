@@ -1,0 +1,5 @@
+Flask
+line-bot-sdk
+schedule
+gspread
+oauth2client
